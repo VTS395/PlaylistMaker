@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@color/blue"
         android:gravity="center"
-        android:text="Экран для медиа"
+        android:text="@string/mediaViewGap"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="@dimen/base_text_size"
