@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(mediaIntent)
         }
 
-        val settingsIntent = Intent(this, SettingsActivity::class.java)
         val settingsClickListener: View.OnClickListener = object : View.OnClickListener {
             override fun onClick(v: View?) {
+                val settingsIntent = Intent(this@MainActivity, SettingsActivity::class.java)
                 startActivity(settingsIntent)
             }
         }
