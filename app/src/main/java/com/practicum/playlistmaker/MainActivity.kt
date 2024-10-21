@@ -1,6 +1,7 @@
 package com.practicum.playlistmaker
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -19,16 +20,20 @@ class MainActivity : AppCompatActivity() {
         val settingsButton = findViewById<Button>(R.id.settingsButton)
 
         searchButton.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Заглушка кнопки поиска", Toast.LENGTH_SHORT).show()
+            val searchIntent = Intent(this, SearchActivity::class.java)
+            startActivity(searchIntent)
         }
 
         mediaButton.setOnClickListener {
-            Toast.makeText(this@MainActivity, "Заглушка кнопки медиа", Toast.LENGTH_SHORT).show()
+            val mediaIntent = Intent(this, MediaActivity::class.java)
+            startActivity(mediaIntent)
         }
+
+        val settingsIntent = Intent(this, SettingsActivity::class.java)
 
         val settingsClickListener: View.OnClickListener = object : View.OnClickListener {
             override fun onClick(v: View?) {
-                Toast.makeText(this@MainActivity, "Заглушка для кнопки настроек", Toast.LENGTH_SHORT).show()
+                startActivity(settingsIntent)
             }
         }
 
