@@ -21,61 +21,24 @@
         android:textSize="@dimen/base_text_size" />
 
     <Button
+        style="@style/MainMenuButton"
         android:id="@+id/searchButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_marginTop="24dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/white"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         android:text="@string/title_search"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/base_text_size"
-        app:cornerRadius="@dimen/corner_radius"
-        app:icon="@drawable/search_icon"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/icon_padding"
-        app:iconTint="@color/black" />
+        app:icon="@drawable/search_icon" />
 
     <Button
+        style="@style/MainMenuButton"
         android:id="@+id/mediaButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_marginTop="@dimen/mid_space_buttons_padding"
-        android:layout_weight="1"
-        android:backgroundTint="@color/white"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         android:text="@string/title_media"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/base_text_size"
-        app:cornerRadius="@dimen/corner_radius"
-        app:icon="@drawable/media_icon"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/icon_padding"
-        app:iconTint="@color/black" />
+        app:icon="@drawable/media_icon" />
 
     <Button
+        style="@style/MainMenuButton"
         android:id="@+id/settingsButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_marginTop="@dimen/mid_space_buttons_padding"
         android:layout_marginBottom="28dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/white"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         android:text="@string/title_settings"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/base_text_size"
-        app:cornerRadius="@dimen/corner_radius"
-        app:icon="@drawable/settings_icon"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/icon_padding"
-        app:iconTint="@color/black" />
-
+        app:icon="@drawable/settings_icon" />
 </LinearLayout>

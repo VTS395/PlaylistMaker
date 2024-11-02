@@ -6,6 +6,7 @@
     <string name="title_darkmode">Темная тема</string>
     <string name="title_shareapp">Поделиться приложением</string>
     <string name="title_support">Написать в поддержку</string>
+    <string name="title_agreement">Пользовательское соглашение</string>
     <string name="mediaViewGap">Экран для медиа</string>
     <string name="settingsViewGap">Экран поиска</string>
 

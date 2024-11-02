@@ -34,27 +34,19 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/base_padding"
-        android:paddingTop="45dp"
+        style="@style/SettingsLineFrame"
+        android:layout_marginTop="24dp"
         android:paddingEnd="6dp"
-        android:paddingBottom="11dp"
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/title_darkmode"
-            android:textColor="@color/black"
-            android:textSize="@dimen/small_text_size" />
+            style="@style/SettingsLineText"
+            android:text="@string/title_darkmode"/>
 
         <Switch
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingVertical="11dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center"
             android:paddingStart="9dp"
             android:paddingEnd="12dp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -62,81 +54,46 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/base_padding"
-        android:paddingTop="19dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="18dp">
+        style="@style/SettingsLineFrame"
+        tools:ignore="RtlSymmetry">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/title_shareapp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/small_text_size" />
+            style="@style/SettingsLineText"
+            android:text="@string/title_shareapp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingHorizontal="4dp"
-            android:paddingVertical="3dp"
-            android:src="@drawable/share_icon" />
+            style="@style/SettingsLineIcon"
+            android:src="@drawable/share_icon"
+            tools:ignore="ContentDescription" />
 
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/base_padding"
-        android:paddingTop="19dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="18dp"
+        style="@style/SettingsLineFrame"
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/title_support"
-            android:textColor="@color/black"
-            android:textSize="@dimen/small_text_size" />
+            style="@style/SettingsLineText"
+            android:text="@string/title_support"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingHorizontal="2dp"
-            android:paddingVertical="3dp"
-            android:src="@drawable/support_icon" />
+            style="@style/SettingsLineIcon"
+            android:src="@drawable/support_icon"
+            tools:ignore="ContentDescription" />
 
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/base_padding"
-        android:paddingTop="19dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="18dp"
+        style="@style/SettingsLineFrame"
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/title_support"
-            android:textColor="@color/black"
-            android:textSize="@dimen/small_text_size" />
+            style="@style/SettingsLineText"
+            android:text="@string/title_agreement"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="5dp"
-            android:src="@drawable/next_icon" />
+            style="@style/SettingsLineIcon"
+            android:src="@drawable/next_icon"
+            tools:ignore="ContentDescription" />
     </FrameLayout>
 </LinearLayout>
