@@ -8,11 +8,12 @@
     tools:context=".MediaActivity">
 
     <TextView
+        style="@style/MainMenuStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blue"
         android:gravity="center"
         android:text="@string/mediaViewGap"
+        android:fontFamily="@font/ys_display_medium"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="@dimen/base_text_size"
