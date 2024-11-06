@@ -57,6 +57,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/shareApp"
         style="@style/SettingsLineFrame"
         tools:ignore="RtlSymmetry">
 
@@ -72,6 +73,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/support"
         style="@style/SettingsLineFrame"
         tools:ignore="RtlSymmetry">
 
@@ -87,6 +89,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/aggriment"
         style="@style/SettingsLineFrame"
         tools:ignore="RtlSymmetry">
 
