@@ -9,5 +9,6 @@
     <string name="title_agreement">Пользовательское соглашение</string>
     <string name="mediaViewGap">Экран для медиа</string>
     <string name="settingsViewGap">Экран поиска</string>
+    <string name="input_hint">Поиск</string>
 
 </resources>

@@ -6,4 +6,5 @@
     <color name="darkGray">#AEAFB4</color>
     <color name="lightGray">#E6E8EB</color>
     <color name="darkBlue">#9FBBF3</color>
+    <color name="invisible">#00FFFFFF</color>
 </resources>
