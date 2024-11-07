@@ -1,5 +1,6 @@
 package com.practicum.playlistmaker
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +17,13 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        val backButton = findViewById<ImageView>(R.id.backButton)
+        backButton.setOnClickListener{
+            val mainActivity = Intent(this, MainActivity::class.java)
+            startActivity(mainActivity)
+        }
+
         val linearLayout = findViewById<LinearLayout>(R.id.container)
         val inputEditText = findViewById<EditText>(R.id.inputEditText)
         val clearButton = findViewById<ImageView>(R.id.clearIcon)
