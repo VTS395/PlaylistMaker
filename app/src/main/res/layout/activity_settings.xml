@@ -19,7 +19,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:scaleType="center"
-            android:src="@drawable/back_icon"/>
+            android:src="@drawable/back_icon"
+            tools:ignore="ContentDescription" />
 
         <TextView
             style="@style/SettingsTitleText"

@@ -23,28 +23,24 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         shareButton.setOnClickListener {
-            val message = "https://practicum.yandex.ru/android-developer/"
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_TEXT, message)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_link))
             startActivity(shareIntent)
         }
 
         supportButton.setOnClickListener {
-            val title = "Сообщение разработчикам и разработчицам приложения Playlist Maker"
-            val message = "Спасибо разработчикам и разработчицам за крутое приложение!"
             val supportIntent = Intent(Intent.ACTION_SENDTO)
             supportIntent.data = Uri.parse("mailto:")
-            supportIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("tsoy@gmlab.pro"))
-            supportIntent.putExtra(Intent.EXTRA_SUBJECT, title)
-            supportIntent.putExtra(Intent.EXTRA_TEXT, message)
+            supportIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.support_email)))
+            supportIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.support_title))
+            supportIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.support_message))
             startActivity(supportIntent)
         }
 
         aggrimentButton.setOnClickListener {
-            val url = "https://yandex.ru/legal/practicum_offer/"
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
+            intent.data = Uri.parse(getString(R.string.share_agriments))
             startActivity(intent)
         }
     }
