@@ -14,25 +14,13 @@
         android:padding="4dp">
 
         <ImageView
-            style="@style/BackArrow"
+            style="@style/TitleBackArrow"
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:scaleType="center"
-            android:src="@drawable/back_icon"
             tools:ignore="ContentDescription" />
 
         <TextView
-            style="@style/SettingsTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:paddingStart="12dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="68dp"
-            android:paddingBottom="12dp"
-            android:text="@string/title_settings"
-            android:textSize="@dimen/base_text_size"
-            android:fontFamily="@font/ys_display_medium"/>
+            style="@style/TitleTextStyle"
+            android:text="@string/title_settings"/>
 
     </LinearLayout>
 
@@ -96,7 +84,6 @@
 
         <TextView
             style="@style/SettingsLineText"
-
             android:text="@string/title_agreement"/>
 
         <ImageView

@@ -14,25 +14,13 @@
         android:padding="4dp">
 
         <ImageView
-            style="@style/BackArrow"
+            style="@style/TitleBackArrow"
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:scaleType="center"
-            android:src="@drawable/back_icon"
             tools:ignore="ContentDescription" />
 
         <TextView
-            style="@style/SettingsTitleText"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:paddingStart="12dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="68dp"
-            android:paddingBottom="12dp"
-            android:text="@string/title_search"
-            android:textSize="@dimen/base_text_size"
-            android:fontFamily="@font/ys_display_medium"/>
+            style="@style/TitleTextStyle"
+            android:text="@string/title_search"/>
 
     </LinearLayout>
 
@@ -52,42 +40,22 @@
             tools:ignore="UselessParent">
 
             <EditText
+                style="@style/EditTextStyle"
                 android:id="@+id/inputEditText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingHorizontal="16dp"
-
                 android:hint="@string/input_hint"
-                android:maxLength="5"
-                android:maxLines="1"
-
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textColorHint="@color/darkGray"
-                android:textSize="16sp"
-                android:fontFamily="@font/ys_display_regular"
-                android:textFontWeight="400"
-
-                android:background="@color/invisible"
                 android:drawableStart="@drawable/search_icon_small"
-                android:drawablePadding="8dp"
-                android:drawableTint="@color/darkGray"
-
                 tools:ignore="Autofill" />
 
             <ImageView
+                style="@style/ClearTextButtonStyle"
                 android:id="@+id/clearIcon"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="end|center"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:visibility="gone"
-
-                app:tint="@color/darkGray"
                 android:backgroundTint="@color/darkGray"
-                android:textColorHint="@color/lightGray"
-
                 tools:ignore="ContentDescription" />
 
         </LinearLayout>
