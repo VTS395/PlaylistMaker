@@ -31,32 +31,22 @@
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/inputEditText"
+            style="@style/EditTextStyle"
+            android:hint="@string/input_hint"
+            android:drawableStart="@drawable/search_icon_small"
+            tools:ignore="Autofill" />
+
+        <ImageView
+            style="@style/ClearTextButtonStyle"
+            android:layout_gravity="end"
+            android:id="@+id/clearIcon"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:background="@drawable/search_edit_text_background"
-            tools:ignore="UselessParent">
+            android:backgroundTint="@color/darkGray"
+            tools:ignore="ContentDescription" />
 
-            <EditText
-                style="@style/EditTextStyle"
-                android:id="@+id/inputEditText"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingHorizontal="16dp"
-                android:hint="@string/input_hint"
-                android:drawableStart="@drawable/search_icon_small"
-                tools:ignore="Autofill" />
 
-            <ImageView
-                style="@style/ClearTextButtonStyle"
-                android:id="@+id/clearIcon"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/darkGray"
-                tools:ignore="ContentDescription" />
-
-        </LinearLayout>
     </FrameLayout>
 </LinearLayout>
