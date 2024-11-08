@@ -34,6 +34,7 @@
         <EditText
             android:id="@+id/inputEditText"
             style="@style/EditTextStyle"
+
             android:hint="@string/input_hint"
             android:drawableStart="@drawable/search_icon_small"
             tools:ignore="Autofill" />
