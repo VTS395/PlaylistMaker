@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.google.android.material.appbar.MaterialToolbar
 
 class SearchActivity : AppCompatActivity() {
 
@@ -40,8 +41,8 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        val backButton = findViewById<ImageView>(R.id.backButton)
-        backButton.setOnClickListener{
+        val backButton = findViewById<MaterialToolbar>(R.id.backButton)
+        backButton.setNavigationOnClickListener{
             val mainActivity = Intent(this, MainActivity::class.java)
             startActivity(mainActivity)
         }

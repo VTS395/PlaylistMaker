@@ -7,22 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        style="@style/ToolBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
-
-        <ImageView
-            style="@style/TitleBackArrow"
-            android:id="@+id/backButton"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            style="@style/TitleTextStyle"
-            android:text="@string/title_search"/>
-
-    </LinearLayout>
+        android:layout_height="56dp"
+        android:id="@+id/backButton"
+        app:navigationIcon="@drawable/back_icon"
+        app:titleTextAppearance="@style/ToolBarTextStyle"
+        app:title="@string/title_search" />
 
     <FrameLayout
         android:layout_width="match_parent"

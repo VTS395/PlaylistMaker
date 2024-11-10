@@ -7,89 +7,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        style="@style/ToolBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
+        android:layout_height="56dp"
+        android:id="@+id/backButton"
+        app:navigationIcon="@drawable/back_icon"
+        app:titleTextAppearance="@style/ToolBarTextStyle"
+        app:title="@string/title_settings" />
 
-        <ImageView
-            style="@style/TitleBackArrow"
-            android:id="@+id/backButton"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            style="@style/TitleTextStyle"
-            android:text="@string/title_settings"/>
-
-    </LinearLayout>
-
-    <FrameLayout
-        style="@style/SettingsLineFrame"
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        style="@style/SettingsLine"
         android:layout_marginTop="24dp"
-        android:paddingEnd="6dp"
-        tools:ignore="RtlSymmetry">
+        android:paddingEnd="18dp"
+        android:text="@string/title_darkmode"
+        app:trackTint="@color/switch_track_color"
+        app:thumbTint="@color/switch_thumb_color"
+        tools:ignore="RtlSymmetry" />
 
-        <TextView
-            style="@style/SettingsLineText"
-            android:text="@string/title_darkmode"/>
-
-        <Switch
-            android:trackTint="@color/switch_track_color"
-            android:thumbTint="@color/switch_thumb_color"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="end|center"
-            android:paddingStart="9dp"
-            android:paddingEnd="12dp"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    </FrameLayout>
-
-    <FrameLayout
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/shareApp"
-        style="@style/SettingsLineFrame"
-        tools:ignore="RtlSymmetry">
+        style="@style/SettingsLine"
+        android:drawableEnd="@drawable/share_icon"
+        android:text="@string/title_shareapp"/>
 
-        <TextView
-            style="@style/SettingsLineText"
-            android:text="@string/title_shareapp"/>
-
-        <ImageView
-            style="@style/SettingsLineIcon"
-            android:src="@drawable/share_icon"
-            tools:ignore="ContentDescription" />
-
-    </FrameLayout>
-
-    <FrameLayout
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/support"
-        style="@style/SettingsLineFrame"
-        tools:ignore="RtlSymmetry">
+        style="@style/SettingsLine"
+        android:paddingEnd="14dp"
+        android:drawableEnd="@drawable/support_icon"
+        android:text="@string/title_support"
+        tools:ignore="RtlSymmetry" />
 
-        <TextView
-            style="@style/SettingsLineText"
-            android:text="@string/title_support"/>
-
-        <ImageView
-            style="@style/SettingsLineIcon"
-            android:src="@drawable/support_icon"
-            tools:ignore="ContentDescription" />
-
-    </FrameLayout>
-
-    <FrameLayout
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/aggriment"
-        style="@style/SettingsLineFrame"
-        tools:ignore="RtlSymmetry">
+        style="@style/SettingsLine"
+        android:paddingEnd="20dp"
+        android:drawableEnd="@drawable/next_icon"
+        android:text="@string/title_agreement"
+        tools:ignore="RtlSymmetry" />
 
-        <TextView
-            style="@style/SettingsLineText"
-            android:text="@string/title_agreement"/>
-
-        <ImageView
-            style="@style/SettingsLineIcon"
-            android:src="@drawable/next_icon"
-            tools:ignore="ContentDescription" />
-    </FrameLayout>
 </LinearLayout>

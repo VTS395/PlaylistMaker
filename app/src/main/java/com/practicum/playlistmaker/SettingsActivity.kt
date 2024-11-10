@@ -6,18 +6,20 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.textview.MaterialTextView
 
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val backButton = findViewById<ImageView>(R.id.backButton)
-        val shareButton = findViewById<FrameLayout>(R.id.shareApp)
-        val supportButton = findViewById<FrameLayout>(R.id.support)
-        val aggrimentButton = findViewById<FrameLayout>(R.id.aggriment)
+        val backButton = findViewById<MaterialToolbar>(R.id.backButton)
+        val shareButton = findViewById<MaterialTextView>(R.id.shareApp)
+        val supportButton = findViewById<MaterialTextView>(R.id.support)
+        val aggrimentButton = findViewById<MaterialTextView>(R.id.aggriment)
 
-        backButton.setOnClickListener{
+        backButton.setNavigationOnClickListener{
             val mainActivity = Intent(this, MainActivity::class.java)
             startActivity(mainActivity)
         }
