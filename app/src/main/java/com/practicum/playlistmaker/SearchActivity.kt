@@ -43,8 +43,7 @@ class SearchActivity : AppCompatActivity() {
 
         val backButton = findViewById<MaterialToolbar>(R.id.backButton)
         backButton.setNavigationOnClickListener{
-            val mainActivity = Intent(this, MainActivity::class.java)
-            startActivity(mainActivity)
+            finish()
         }
 
         val inputEditText = findViewById<EditText>(R.id.inputEditText)

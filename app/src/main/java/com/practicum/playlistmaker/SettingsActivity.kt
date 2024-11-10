@@ -20,8 +20,7 @@ class SettingsActivity : AppCompatActivity() {
         val aggrimentButton = findViewById<MaterialTextView>(R.id.aggriment)
 
         backButton.setNavigationOnClickListener{
-            val mainActivity = Intent(this, MainActivity::class.java)
-            startActivity(mainActivity)
+            finish()
         }
 
         shareButton.setOnClickListener {
