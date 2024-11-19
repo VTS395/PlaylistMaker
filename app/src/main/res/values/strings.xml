@@ -6,7 +6,14 @@
     <string name="title_darkmode">Темная тема</string>
     <string name="title_shareapp">Поделиться приложением</string>
     <string name="title_support">Написать в поддержку</string>
+    <string name="title_agreement">Пользовательское соглашение</string>
     <string name="mediaViewGap">Экран для медиа</string>
     <string name="settingsViewGap">Экран поиска</string>
+    <string name="input_hint">Поиск</string>
+    <string name="share_link">https://practicum.yandex.ru/android-developer/</string>
+    <string name="share_agriments">https://yandex.ru/legal/practicum_offer/</string>
+    <string name="support_title">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
+    <string name="support_message">Спасибо разработчикам и разработчицам за крутое приложение!</string>
+    <string name="support_email">tsoy@gmlab.pro</string>
 
 </resources>
