@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivCover"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/coverImageSize"
+        android:layout_height="@dimen/coverImageSize"
         android:layout_marginStart="13dp"
         tools:src="@drawable/ic_placeholder"
         android:scaleType="center"

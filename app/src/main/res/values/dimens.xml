@@ -8,4 +8,5 @@
     <dimen name="corner_radius">16dp</dimen>
     <dimen name="icon_padding">8dp</dimen>
     <dimen name="icon_size">24dp</dimen>
+    <dimen name="coverImageSize">45dp</dimen>
 </resources>
