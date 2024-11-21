@@ -11,9 +11,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class TrackViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
-    private val ivCover: ImageView = itemView.findViewById(R.id.ivCover)
-    private val tvtrackName: TextView = itemView.findViewById(R.id.tvTrackName)
-    private val tvArtistNameAndTime: TextView = itemView.findViewById(R.id.tvArtistNameAndTime)
+    private val ivCover: ImageView
+    private val tvtrackName: TextView
+    private val tvArtistNameAndTime: TextView
+
+    init {
+        ivCover = itemView.findViewById(R.id.ivCover)
+        tvtrackName = itemView.findViewById(R.id.tvTrackName)
+        tvArtistNameAndTime =  itemView.findViewById(R.id.tvArtistNameAndTime)
+    }
 
     @SuppressLint("SetTextI18n")
     fun bind(model: Track){
