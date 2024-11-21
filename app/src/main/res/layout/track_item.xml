@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="61dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/ivCover"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="13dp"
+        tools:src="@drawable/ic_placeholder"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp"
+        android:paddingVertical="14dp">
+
+        <TextView
+            android:id="@+id/tvTrackName"
+            style="@style/TrackNameStyle"
+            tools:text = "Yestedar(Remastered 2009)"/>
+
+        <TextView
+            android:id="@+id/tvArtistName"
+            style="@style/ArtistNameAndTimeStyle"
+            tools:text ="The Beatles • 2:55"/>
+    </LinearLayout>
+
+    <ImageView
+        style="@style/TrackItemArrowStyle"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>
