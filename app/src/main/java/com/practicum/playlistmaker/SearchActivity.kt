@@ -109,7 +109,6 @@ class SearchActivity : AppCompatActivity() {
         ))
 
         val rwTrackList = findViewById<RecyclerView>(R.id.rwTrackList)
-        rwTrackList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val trackAdapter = TrackAdapter(mokTracks)
         rwTrackList.adapter = trackAdapter
     }
