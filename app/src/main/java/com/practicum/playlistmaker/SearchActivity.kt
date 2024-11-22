@@ -22,6 +22,9 @@ import com.google.android.material.appbar.MaterialToolbar
 class SearchActivity : AppCompatActivity() {
 
     private var textValue: String? = TEXT_DEF
+    private lateinit var inputEditText: EditText
+    private lateinit var clearButton: ImageView
+    private lateinit var rwTrackList: RecyclerView
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -43,13 +46,15 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        inputEditText = findViewById<EditText>(R.id.inputEditText)
+        clearButton = findViewById<ImageView>(R.id.clearIcon)
+        rwTrackList = findViewById<RecyclerView>(R.id.rwTrackList)
+
+
         val backButton = findViewById<MaterialToolbar>(R.id.backButton)
         backButton.setNavigationOnClickListener{
             finish()
         }
-
-        val inputEditText = findViewById<EditText>(R.id.inputEditText)
-        val clearButton = findViewById<ImageView>(R.id.clearIcon)
 
         clearButton.setOnClickListener {
             inputEditText.setText("")
@@ -75,7 +80,6 @@ class SearchActivity : AppCompatActivity() {
         }
         inputEditText.addTextChangedListener(textWatcher)
 
-        // Sprint 10
         val mokTracks = ArrayList<Track>()
         mokTracks.add(Track(
             "Smells Like Teen Spirit",
@@ -108,9 +112,7 @@ class SearchActivity : AppCompatActivity() {
             "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/a0/4d/c4/a04dc484-03cc-02aa-fa82-5334fcb4bc16/18UMGIM24878.rgb.jpg/100x100bb.jpg"
         ))
 
-        val rwTrackList = findViewById<RecyclerView>(R.id.rwTrackList)
-        val trackAdapter = TrackAdapter(mokTracks)
-        rwTrackList.adapter = trackAdapter
+        rwTrackList.adapter = TrackAdapter(mokTracks)
     }
 
     private fun clearButtonVisibility(s: CharSequence?): Int {
