@@ -39,7 +39,13 @@
             android:layout_height="match_parent"
             android:backgroundTint="@color/darkGray"
             tools:ignore="ContentDescription" />
-
-
     </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rwTrackList"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"/>
+
 </LinearLayout>

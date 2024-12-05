@@ -4,7 +4,9 @@
     <dimen name="mid_space_buttons_padding">16dp</dimen>
     <dimen name="base_text_size">22sp</dimen>
     <dimen name="small_text_size">16sp</dimen>
+    <dimen name="min_text_size">11sp</dimen>
     <dimen name="corner_radius">16dp</dimen>
     <dimen name="icon_padding">8dp</dimen>
     <dimen name="icon_size">24dp</dimen>
+    <dimen name="coverImageSize">45dp</dimen>
 </resources>
