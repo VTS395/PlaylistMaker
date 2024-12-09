@@ -86,7 +86,7 @@ class SearchActivity : AppCompatActivity() {
             inputEditText.setText("")
             tracks.clear()
             adapter.notifyDataSetChanged()
-            rwViewWithResult()
+            setPlaceholderVisibility(true)
 
             val inputMethodManager =
                 getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -134,7 +134,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
                 if (response.code() == 200) {
                     tracks.clear()
-                    rwViewWithResult()
+                    setPlaceholderVisibility(true)
 
                     if (response.body()?.results?.isNotEmpty() == true) {
                         tracks.addAll(response.body()?.results!!)
@@ -143,13 +143,14 @@ class SearchActivity : AppCompatActivity() {
                     if (tracks.isEmpty()) {
                         tracks.clear()
 
-                        rwTrackList.visibility = View.GONE
-                        placeholder.visibility = View.VISIBLE
-                        placeholderMessage.visibility = View.VISIBLE
+                        setPlaceholderVisibility(false)
+                        updateResponse.visibility = View.GONE
 
                         placeholder.setImageResource(R.drawable.ic_notning_found)
                         placeholderMessage.setText(R.string.nothing_found)
                     }
+                } else {
+                    showError(input)
                 }
             }
             override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
@@ -159,10 +160,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showError(input: String){
-        rwTrackList.visibility = View.GONE
-        placeholder.visibility = View.VISIBLE
-        placeholderMessage.visibility = View.VISIBLE
-        updateResponse.visibility = View.VISIBLE
+        setPlaceholderVisibility(false)
 
         placeholder.setImageResource(R.drawable.ic_no_internet)
         placeholderMessage.setText(R.string.connection_problems)
@@ -170,11 +168,18 @@ class SearchActivity : AppCompatActivity() {
         lastQuery = input
     }
 
-    private fun rwViewWithResult() {
-        rwTrackList.visibility = View.VISIBLE
-        placeholder.visibility = View.GONE
-        placeholderMessage.visibility = View.GONE
-        updateResponse.visibility = View.GONE
+    private fun setPlaceholderVisibility(isNotVisible: Boolean) {
+        if (isNotVisible) {
+            rwTrackList.visibility = View.VISIBLE
+            placeholder.visibility = View.GONE
+            placeholderMessage.visibility = View.GONE
+            updateResponse.visibility = View.GONE
+        } else {
+            rwTrackList.visibility = View.GONE
+            placeholder.visibility = View.VISIBLE
+            placeholderMessage.visibility = View.VISIBLE
+            updateResponse.visibility = View.VISIBLE
+        }
     }
 
     private fun clearButtonVisibility(s: CharSequence?): Int {
