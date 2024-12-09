@@ -27,6 +27,9 @@
             android:id="@+id/inputEditText"
             style="@style/EditTextStyle"
 
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+
             android:hint="@string/input_hint"
             android:drawableStart="@drawable/search_icon_small"
             tools:ignore="Autofill" />
@@ -40,6 +43,20 @@
             android:backgroundTint="@color/darkGray"
             tools:ignore="ContentDescription" />
     </FrameLayout>
+
+    <ImageView
+        style="@style/PlaceholderStyle"
+        android:id="@+id/placeholder"
+        tools:src="@drawable/ic_no_internet"/>
+
+    <TextView
+        style="@style/PlaceholderMassageStyle"
+        android:id="@+id/PlaceholderMessage" />
+
+    <Button
+        style="@style/UpdateResponseButtonStyle"
+        android:id="@+id/updateResponse"
+        android:text="@string/search_update"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rwTrackList"
