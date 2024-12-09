@@ -40,7 +40,7 @@ class SearchActivity : AppCompatActivity() {
 
     private val tracks = ArrayList<Track>()
     private val adapter = TrackAdapter(tracks)
-    var lastQuery = ""
+    private var lastQuery = ""
 
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://itunes.apple.com")
