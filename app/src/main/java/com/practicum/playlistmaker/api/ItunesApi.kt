@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker
+package com.practicum.playlistmaker.api
 
 import retrofit2.Call
 import retrofit2.http.GET

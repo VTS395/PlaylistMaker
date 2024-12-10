@@ -1,7 +1,6 @@
 package com.practicum.playlistmaker
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,17 +10,16 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
+import com.practicum.playlistmaker.api.ItunesApi
+import com.practicum.playlistmaker.api.RetrofitClient
+import com.practicum.playlistmaker.api.Track
+import com.practicum.playlistmaker.api.TrackResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,13 +39,6 @@ class SearchActivity : AppCompatActivity() {
     private val tracks = ArrayList<Track>()
     private val adapter = TrackAdapter(tracks)
     private var lastQuery = ""
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://itunes.apple.com")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val itunesService = retrofit.create(ItunesApi::class.java)
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -130,7 +121,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun trackSearch(input: String) {
-        itunesService.search(input).enqueue(object : Callback<TrackResponse> {
+        RetrofitClient.itunesService.search(input).enqueue(object : Callback<TrackResponse> {
             override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
                 if (response.code() == 200) {
                     tracks.clear()
@@ -153,13 +144,14 @@ class SearchActivity : AppCompatActivity() {
                     showError(input)
                 }
             }
+
             override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
                 showError(input)
             }
         })
     }
 
-    private fun showError(input: String){
+    private fun showError(input: String) {
         setPlaceholderVisibility(false)
 
         placeholder.setImageResource(R.drawable.ic_no_internet)

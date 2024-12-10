@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker
+package com.practicum.playlistmaker.api
 
 class TrackResponse(
     val resultCount: Int,

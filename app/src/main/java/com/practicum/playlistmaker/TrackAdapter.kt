@@ -3,6 +3,7 @@ package com.practicum.playlistmaker
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.practicum.playlistmaker.api.Track
 
 class TrackAdapter(
     private val tracks: List<Track>
