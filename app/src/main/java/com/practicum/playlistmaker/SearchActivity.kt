@@ -16,15 +16,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
-import com.practicum.playlistmaker.api.ItunesApi
 import com.practicum.playlistmaker.api.RetrofitClient
 import com.practicum.playlistmaker.api.Track
 import com.practicum.playlistmaker.api.TrackResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
 
@@ -78,10 +75,7 @@ class SearchActivity : AppCompatActivity() {
             tracks.clear()
             adapter.notifyDataSetChanged()
             setPlaceholderVisibility(true)
-
-            val inputMethodManager =
-                getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            inputMethodManager?.hideSoftInputFromWindow(clearButton.windowToken, 0)
+            hideKeyboard()
         }
 
         val textWatcher = object : TextWatcher {
@@ -132,13 +126,7 @@ class SearchActivity : AppCompatActivity() {
                         adapter.notifyDataSetChanged()
                     }
                     if (tracks.isEmpty()) {
-                        tracks.clear()
-
-                        setPlaceholderVisibility(false)
-                        updateResponse.visibility = View.GONE
-
-                        placeholder.setImageResource(R.drawable.ic_notning_found)
-                        placeholderMessage.setText(R.string.nothing_found)
+                        showNoResults()
                     }
                 } else {
                     showError(input)
@@ -153,11 +141,17 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showError(input: String) {
         setPlaceholderVisibility(false)
-
         placeholder.setImageResource(R.drawable.ic_no_internet)
         placeholderMessage.setText(R.string.connection_problems)
-
         lastQuery = input
+    }
+
+    private fun showNoResults() {
+        tracks.clear()
+        setPlaceholderVisibility(false)
+        updateResponse.visibility = View.GONE
+        placeholder.setImageResource(R.drawable.ic_notning_found)
+        placeholderMessage.setText(R.string.nothing_found)
     }
 
     private fun setPlaceholderVisibility(isNotVisible: Boolean) {
@@ -174,11 +168,9 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun clearButtonVisibility(s: CharSequence?): Int {
-        return if (s.isNullOrEmpty()) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
+    private fun hideKeyboard() {
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        inputMethodManager?.hideSoftInputFromWindow(clearButton.windowToken, 0)
     }
 }
