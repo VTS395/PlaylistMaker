@@ -15,5 +15,9 @@
     <string name="support_title">Сообщение разработчикам и разработчицам приложения Playlist Maker</string>
     <string name="support_message">Спасибо разработчикам и разработчицам за крутое приложение!</string>
     <string name="support_email">tsoy@gmlab.pro</string>
+    <string name="search_update">Обновить</string>
+    <string name="connection_problems">Проблемы со связью\n\nЗагрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="nothing_found">Ничего не нашлось</string>
+    <string name="nothing_to_search">Последнего не существует</string>
 
 </resources>
