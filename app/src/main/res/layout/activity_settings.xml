@@ -18,6 +18,7 @@
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         style="@style/SettingsLine"
+        android:id="@+id/themeSwitcher"
         android:layout_marginTop="24dp"
         android:paddingEnd="18dp"
         android:text="@string/title_darkmode"
