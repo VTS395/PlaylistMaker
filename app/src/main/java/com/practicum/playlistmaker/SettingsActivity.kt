@@ -19,8 +19,10 @@ class SettingsActivity : AppCompatActivity() {
         val shareButton = findViewById<MaterialTextView>(R.id.shareApp)
         val supportButton = findViewById<MaterialTextView>(R.id.support)
         val aggrimentButton = findViewById<MaterialTextView>(R.id.aggriment)
+        val themeSwitcher = findViewById<SwitchMaterial>(R.id.themeSwitcher) //добавил переключатель в код
 
-        val themeSwitcher = findViewById<SwitchMaterial>(R.id.themeSwitcher)
+        val app = applicationContext as App
+        themeSwitcher.isChecked = app.darkTheme
 
         themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
             (applicationContext as App).switchTheme(checked)
