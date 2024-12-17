@@ -21,7 +21,8 @@
         android:layout_height="52dp"
         android:layout_gravity="center"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp">
+        android:paddingVertical="8dp"
+        android:layout_marginBottom="16dp">
 
         <EditText
             android:id="@+id/inputEditText"
@@ -54,15 +55,33 @@
         android:id="@+id/PlaceholderMessage" />
 
     <Button
-        style="@style/UpdateResponseButtonStyle"
+        style="@style/SearchButtonStyle"
         android:id="@+id/updateResponse"
         android:text="@string/search_update"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rwTrackList"
-        app:layoutManager="LinearLayoutManager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/historyHeader"
+        style="@style/SearchHeaderStyle"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rwTrackList"
+            app:layoutManager="LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            style="@style/SearchButtonStyle"
+            android:id="@+id/historyClear"
+            android:layout_marginVertical="24dp"
+            android:visibility="gone"
+            android:text="@string/clear_history"/>
+
+    </LinearLayout>
 </LinearLayout>
