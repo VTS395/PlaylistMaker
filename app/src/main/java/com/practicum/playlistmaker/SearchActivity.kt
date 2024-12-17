@@ -74,7 +74,7 @@ class SearchActivity : AppCompatActivity() {
             inputEditText.setText("")
             tracks.clear()
             adapter.notifyDataSetChanged()
-            setPlaceholderVisibility(true)
+            setPlaceholderVisibility(false)
             hideKeyboard()
         }
 
@@ -119,7 +119,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
                 if (response.code() == 200) {
                     tracks.clear()
-                    setPlaceholderVisibility(true)
+                    setPlaceholderVisibility(false)
 
                     if (response.body()?.results?.isNotEmpty() == true) {
                         tracks.addAll(response.body()?.results!!)
@@ -140,7 +140,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showError(input: String) {
-        setPlaceholderVisibility(false)
+        setPlaceholderVisibility(true)
         placeholder.setImageResource(R.drawable.ic_no_internet)
         placeholderMessage.setText(R.string.connection_problems)
         lastQuery = input
@@ -148,23 +148,23 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showNoResults() {
         tracks.clear()
-        setPlaceholderVisibility(false)
+        setPlaceholderVisibility(true)
         updateResponse.visibility = View.GONE
         placeholder.setImageResource(R.drawable.ic_notning_found)
         placeholderMessage.setText(R.string.nothing_found)
     }
 
-    private fun setPlaceholderVisibility(isNotVisible: Boolean) {
-        if (isNotVisible) {
-            rwTrackList.visibility = View.VISIBLE
-            placeholder.visibility = View.GONE
-            placeholderMessage.visibility = View.GONE
-            updateResponse.visibility = View.GONE
-        } else {
+    private fun setPlaceholderVisibility(isVisible: Boolean) {
+        if (isVisible) {
             rwTrackList.visibility = View.GONE
             placeholder.visibility = View.VISIBLE
             placeholderMessage.visibility = View.VISIBLE
             updateResponse.visibility = View.VISIBLE
+        } else {
+            rwTrackList.visibility = View.VISIBLE
+            placeholder.visibility = View.GONE
+            placeholderMessage.visibility = View.GONE
+            updateResponse.visibility = View.GONE
         }
     }
 
