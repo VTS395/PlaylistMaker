@@ -141,7 +141,9 @@ class SearchActivity : AppCompatActivity() {
 
         searchField.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                trackSearch(searchField.text.toString())
+                if (searchField.text.isNotEmpty()){
+                    trackSearch(searchField.text.toString())
+                }
             }
             false
         }
