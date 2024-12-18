@@ -119,11 +119,16 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.isVisible = !s.isNullOrEmpty()
                 textValue = s?.toString()
+
                 if (searchField.hasFocus() && s?.isEmpty() == true && history.isNotEmpty()) {
                     setHistoryVisibility(true)
                     loadHistory()
                 } else {
                     setHistoryVisibility(false)
+                }
+
+                if(s.isNullOrEmpty()) {
+                    setPlaceholderVisibility(false)
                 }
             }
 
