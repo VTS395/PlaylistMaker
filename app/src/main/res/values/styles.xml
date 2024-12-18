@@ -47,7 +47,7 @@
         <item name="android:background">@color/blue</item>
     </style>
 
-    <style name="SettingsStyle">
+    <style name="BackgroundStyleBlackAndWhite">
         <item name="android:background">@color/white</item>
     </style>
 
@@ -127,7 +127,7 @@
         <item name="android:textFontWeight">400</item>
     </style>
 
-    <style name="UpdateResponseButtonStyle">
+    <style name="SearchButtonStyle">
         <item name="android:visibility">gone</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -144,5 +144,19 @@
         <item name="android:textFontWeight">500</item>
         <item name="cornerRadius">54dp</item>
     </style>
+    
+    <style name="SearchHeaderStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginVertical">8dp</item>
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:text">@string/history_header_text</item>
+    </style>
+
 
 </resources>
