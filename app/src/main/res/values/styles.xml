@@ -47,7 +47,7 @@
         <item name="android:background">@color/blue</item>
     </style>
 
-    <style name="SettingsStyle">
+    <style name="BackgroundStyleBlackAndWhite">
         <item name="android:background">@color/white</item>
     </style>
 
