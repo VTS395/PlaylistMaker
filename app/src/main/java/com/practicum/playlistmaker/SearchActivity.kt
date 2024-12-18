@@ -25,16 +25,30 @@ import retrofit2.Response
 
 class SearchActivity : AppCompatActivity() {
 
+    private lateinit var searchHistory: SearchHistory
+
     private var textValue: String? = TEXT_DEF
-    private lateinit var inputEditText: EditText
+    private lateinit var searchField: EditText
     private lateinit var clearButton: ImageView
-    private lateinit var rwTrackList: RecyclerView
+    private lateinit var recyclerViewTrackList: RecyclerView
     private lateinit var placeholder: ImageView
     private lateinit var placeholderMessage: TextView
     private lateinit var updateResponse: Button
+    private lateinit var historyHeader: TextView
+    private lateinit var historyClear: Button
 
     private val tracks = ArrayList<Track>()
-    private val adapter = TrackAdapter(tracks)
+    private val history = ArrayList<Track>()
+
+    private val searchAdapter = TrackAdapter(tracks) {
+        searchHistory.addTrackToHistory(it)
+        loadHistory()
+    }
+
+    private val historyAdapter = TrackAdapter(history) {
+        Toast.makeText(applicationContext, "Player will be here later", Toast.LENGTH_SHORT).show()
+    }
+
     private var lastQuery = ""
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -57,13 +71,32 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        inputEditText = findViewById<EditText>(R.id.inputEditText)
+        val sharedPreferences = getSharedPreferences("searchPrefs", Context.MODE_PRIVATE)
+        searchHistory = SearchHistory(sharedPreferences)
+
+        searchField = findViewById<EditText>(R.id.inputEditText)
         clearButton = findViewById<ImageView>(R.id.clearIcon)
-        rwTrackList = findViewById<RecyclerView>(R.id.rwTrackList)
+        recyclerViewTrackList = findViewById<RecyclerView>(R.id.rwTrackList)
         placeholder = findViewById<ImageView>(R.id.placeholder)
         placeholderMessage = findViewById<TextView>(R.id.PlaceholderMessage)
         updateResponse = findViewById<Button>(R.id.updateResponse)
+        historyHeader = findViewById<TextView>(R.id.historyHeader)
+        historyClear = findViewById<Button>(R.id.historyClear)
 
+        searchField.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus && searchField.text.isEmpty() && history.isNotEmpty()) {
+                setHistoryVisibility(true)
+            } else {
+                setHistoryVisibility(false)
+            }
+        }
+
+        historyClear.setOnClickListener {
+            searchHistory.clearHistory()
+            history.clear()
+            historyAdapter.notifyDataSetChanged()
+            setHistoryVisibility(false)
+        }
 
         val backButton = findViewById<MaterialToolbar>(R.id.backButton)
         backButton.setNavigationOnClickListener {
@@ -71,9 +104,9 @@ class SearchActivity : AppCompatActivity() {
         }
 
         clearButton.setOnClickListener {
-            inputEditText.setText("")
+            searchField.setText("")
             tracks.clear()
-            adapter.notifyDataSetChanged()
+            searchAdapter.notifyDataSetChanged()
             setPlaceholderVisibility(false)
             hideKeyboard()
         }
@@ -85,20 +118,25 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.isVisible = !s.isNullOrEmpty()
-
                 textValue = s?.toString()
+                if (searchField.hasFocus() && s?.isEmpty() == true && history.isNotEmpty()) {
+                    setHistoryVisibility(true)
+                    loadHistory()
+                } else {
+                    setHistoryVisibility(false)
+                }
             }
 
             override fun afterTextChanged(s: Editable?) {
                 // empty
             }
         }
-        inputEditText.addTextChangedListener(textWatcher)
-        rwTrackList.adapter = adapter
+        searchField.addTextChangedListener(textWatcher)
+        recyclerViewTrackList.adapter = searchAdapter
 
-        inputEditText.setOnEditorActionListener { _, actionId, _ ->
+        searchField.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                trackSearch(inputEditText.text.toString())
+                trackSearch(searchField.text.toString())
             }
             false
         }
@@ -111,7 +149,13 @@ class SearchActivity : AppCompatActivity() {
                     .show()
             }
         }
+        loadHistory()
+    }
 
+    fun loadHistory() {
+        history.clear()
+        history.addAll(searchHistory.getSearchHistory())
+        historyAdapter.notifyDataSetChanged()
     }
 
     private fun trackSearch(input: String) {
@@ -123,7 +167,8 @@ class SearchActivity : AppCompatActivity() {
 
                     if (response.body()?.results?.isNotEmpty() == true) {
                         tracks.addAll(response.body()?.results!!)
-                        adapter.notifyDataSetChanged()
+                        searchAdapter.notifyDataSetChanged()
+                        recyclerViewTrackList.adapter = searchAdapter
                     }
                     if (tracks.isEmpty()) {
                         showNoResults()
@@ -156,15 +201,28 @@ class SearchActivity : AppCompatActivity() {
 
     private fun setPlaceholderVisibility(isVisible: Boolean) {
         if (isVisible) {
-            rwTrackList.visibility = View.GONE
+            recyclerViewTrackList.visibility = View.GONE
             placeholder.visibility = View.VISIBLE
             placeholderMessage.visibility = View.VISIBLE
             updateResponse.visibility = View.VISIBLE
         } else {
-            rwTrackList.visibility = View.VISIBLE
+            recyclerViewTrackList.visibility = View.VISIBLE
             placeholder.visibility = View.GONE
             placeholderMessage.visibility = View.GONE
             updateResponse.visibility = View.GONE
+        }
+    }
+
+    private fun setHistoryVisibility(isVisible: Boolean) {
+        recyclerViewTrackList.adapter = historyAdapter
+        if (isVisible) {
+            historyHeader.visibility = View.VISIBLE
+            recyclerViewTrackList.visibility = View.VISIBLE
+            historyClear.visibility = View.VISIBLE
+        } else {
+            historyHeader.visibility = View.GONE
+            recyclerViewTrackList.visibility = View.GONE
+            historyClear.visibility = View.GONE
         }
     }
 
