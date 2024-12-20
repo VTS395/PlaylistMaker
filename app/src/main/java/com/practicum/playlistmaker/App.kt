@@ -3,8 +3,10 @@ package com.practicum.playlistmaker
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 
+@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class App : Application() {
 
     private val DARK_THEME_PREFS = "darkThemePrefs"
@@ -41,7 +43,11 @@ class App : Application() {
     }
 
     private fun getSavedThemePreference(): Boolean {
-        return sharedPreferences.getBoolean(DARK_THEME_KEY, false)
+        return if(sharedPreferences.contains(DARK_THEME_KEY)) {
+            sharedPreferences.getBoolean(DARK_THEME_KEY, false)
+        } else {
+            (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) === Configuration.UI_MODE_NIGHT_YES
+        }
     }
 }
 
