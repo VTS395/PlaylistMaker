@@ -42,7 +42,6 @@ class SearchActivity : AppCompatActivity() {
 
     private val searchAdapter = TrackAdapter(tracks) {
         searchHistory.addTrackToHistory(it)
-        loadHistory()
     }
 
     private val historyAdapter = TrackAdapter(history) {
@@ -122,7 +121,6 @@ class SearchActivity : AppCompatActivity() {
 
                 if (searchField.hasFocus() && s?.isEmpty() == true && history.isNotEmpty()) {
                     setHistoryVisibility(true)
-                    loadHistory()
                 } else {
                     setHistoryVisibility(false)
                 }
@@ -130,6 +128,8 @@ class SearchActivity : AppCompatActivity() {
                 if(s.isNullOrEmpty()) {
                     setPlaceholderVisibility(false)
                 }
+
+                loadHistory()
             }
 
             override fun afterTextChanged(s: Editable?) {
