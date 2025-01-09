@@ -62,7 +62,7 @@ class SearchActivity : AppCompatActivity() {
 
         audioPlayerIntent.putExtra("trackName", it.trackName)
         audioPlayerIntent.putExtra("artistName", it.artistName)
-        audioPlayerIntent.putExtra("trackTimeMillis", it.getCoverArtwork())
+        audioPlayerIntent.putExtra("trackTimeMillis", it.trackTimeMillis)
         audioPlayerIntent.putExtra("artworkUrl100", it.getCoverArtwork())
         audioPlayerIntent.putExtra("collectionName", it.collectionName)
         audioPlayerIntent.putExtra("releaseDate", it.getreleaseYear())
