@@ -7,6 +7,11 @@
     <color name="lightGray">#E6E8EB</color>
     <color name="darkBlue">#9FBBF3</color>
     <color name="invisible">#00FFFFFF</color>
+    <color name="yellow">#FCD452</color>
 
     <color name="VectorPlaceholderBaseColor">@color/white</color>
+    <color name="PlayButtonColor">@color/white</color>
+    <color name="PlaylistAndFavoriteColor">@color/white</color>
+    <color name="BackIconColor">@color/white</color>
+
 </resources>

@@ -3,6 +3,7 @@ package com.practicum.playlistmaker
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 
 class App : Application() {
@@ -41,7 +42,17 @@ class App : Application() {
     }
 
     private fun getSavedThemePreference(): Boolean {
-        return sharedPreferences.getBoolean(DARK_THEME_KEY, false)
+
+        if (sharedPreferences.contains(DARK_THEME_KEY)) {
+            return sharedPreferences.getBoolean(DARK_THEME_KEY, false)
+        }
+        return isCurrentThemeDark()
+
     }
+
+    private fun isCurrentThemeDark(): Boolean{
+        return resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+    }
+
 }
 

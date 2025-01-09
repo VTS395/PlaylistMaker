@@ -10,4 +10,7 @@
     <color name="yellow">#FCD452</color>
 
     <color name="VectorPlaceholderBaseColor">@color/black</color>
+    <color name="PlayButtonColor">@color/black</color>
+    <color name="PlaylistAndFavoriteColor">@color/black</color>
+    <color name="BackIconColor">@color/black</color>
 </resources>

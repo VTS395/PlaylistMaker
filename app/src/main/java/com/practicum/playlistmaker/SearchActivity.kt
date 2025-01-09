@@ -1,6 +1,7 @@
 package com.practicum.playlistmaker
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -42,10 +43,33 @@ class SearchActivity : AppCompatActivity() {
 
     private val searchAdapter = TrackAdapter(tracks) {
         searchHistory.addTrackToHistory(it)
+        val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
+
+        audioPlayerIntent.putExtra("trackName", it.trackName)
+        audioPlayerIntent.putExtra("artistName", it.artistName)
+        audioPlayerIntent.putExtra("trackTimeMillis", it.trackTimeMillis)
+        audioPlayerIntent.putExtra("artworkUrl100", it.getCoverArtwork())
+        audioPlayerIntent.putExtra("collectionName", it.collectionName)
+        audioPlayerIntent.putExtra("releaseDate", it.getreleaseYear())
+        audioPlayerIntent.putExtra("primaryGenreName", it.primaryGenreName)
+        audioPlayerIntent.putExtra("country", it.country)
+
+        startActivity(audioPlayerIntent)
     }
 
     private val historyAdapter = TrackAdapter(history) {
-        Toast.makeText(applicationContext, "Player will be here later", Toast.LENGTH_SHORT).show()
+        val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
+
+        audioPlayerIntent.putExtra("trackName", it.trackName)
+        audioPlayerIntent.putExtra("artistName", it.artistName)
+        audioPlayerIntent.putExtra("trackTimeMillis", it.getCoverArtwork())
+        audioPlayerIntent.putExtra("artworkUrl100", it.getCoverArtwork())
+        audioPlayerIntent.putExtra("collectionName", it.collectionName)
+        audioPlayerIntent.putExtra("releaseDate", it.getreleaseYear())
+        audioPlayerIntent.putExtra("primaryGenreName", it.primaryGenreName)
+        audioPlayerIntent.putExtra("country", it.country)
+
+        startActivity(audioPlayerIntent)
     }
 
     private var lastQuery = ""
