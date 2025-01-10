@@ -43,33 +43,13 @@ class SearchActivity : AppCompatActivity() {
 
     private val searchAdapter = TrackAdapter(tracks) {
         searchHistory.addTrackToHistory(it)
-        val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
-
-        audioPlayerIntent.putExtra("trackName", it.trackName)
-        audioPlayerIntent.putExtra("artistName", it.artistName)
-        audioPlayerIntent.putExtra("trackTimeMillis", it.trackTimeMillis)
-        audioPlayerIntent.putExtra("artworkUrl100", it.getCoverArtwork())
-        audioPlayerIntent.putExtra("collectionName", it.collectionName)
-        audioPlayerIntent.putExtra("releaseDate", it.getreleaseYear())
-        audioPlayerIntent.putExtra("primaryGenreName", it.primaryGenreName)
-        audioPlayerIntent.putExtra("country", it.country)
-
-        startActivity(audioPlayerIntent)
+        runAudioPlayer(it)
     }
 
     private val historyAdapter = TrackAdapter(history) {
         val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
 
-        audioPlayerIntent.putExtra("trackName", it.trackName)
-        audioPlayerIntent.putExtra("artistName", it.artistName)
-        audioPlayerIntent.putExtra("trackTimeMillis", it.trackTimeMillis)
-        audioPlayerIntent.putExtra("artworkUrl100", it.getCoverArtwork())
-        audioPlayerIntent.putExtra("collectionName", it.collectionName)
-        audioPlayerIntent.putExtra("releaseDate", it.getreleaseYear())
-        audioPlayerIntent.putExtra("primaryGenreName", it.primaryGenreName)
-        audioPlayerIntent.putExtra("country", it.country)
-
-        startActivity(audioPlayerIntent)
+        runAudioPlayer(it)
     }
 
     private var lastQuery = ""
@@ -261,5 +241,20 @@ class SearchActivity : AppCompatActivity() {
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         inputMethodManager?.hideSoftInputFromWindow(clearButton.windowToken, 0)
+    }
+
+    private fun  runAudioPlayer(track: Track) {
+        val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
+
+        audioPlayerIntent.putExtra("trackName", track.trackName)
+        audioPlayerIntent.putExtra("artistName", track.artistName)
+        audioPlayerIntent.putExtra("trackTimeMillis", track.trackTimeMillis)
+        audioPlayerIntent.putExtra("artworkUrl100", track.getCoverArtwork())
+        audioPlayerIntent.putExtra("collectionName", track.collectionName)
+        audioPlayerIntent.putExtra("releaseDate", track.getreleaseYear())
+        audioPlayerIntent.putExtra("primaryGenreName", track.primaryGenreName)
+        audioPlayerIntent.putExtra("country", track.country)
+
+        startActivity(audioPlayerIntent)
     }
 }
