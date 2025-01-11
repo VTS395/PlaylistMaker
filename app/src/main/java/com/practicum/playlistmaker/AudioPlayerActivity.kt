@@ -40,11 +40,13 @@ class AudioPlayerActivity : AppCompatActivity() {
         primaryGenreNameTextView.text = intent.getStringExtra(AppConstants.PRIMARY_GENRE_NAME)
         countryTextView.text = intent.getStringExtra(AppConstants.COUNTRY)
 
+        val cornerRadius = dpToPx(8f, this)
 
         Glide.with(this)
             .load(intent.getStringExtra("artworkUrl100"))
             .fitCenter()
             .placeholder(R.drawable.album_cover_placeholder)
+            .transform(RoundedCorners(cornerRadius))
             .into(albumCoverImageView)
     }
 
