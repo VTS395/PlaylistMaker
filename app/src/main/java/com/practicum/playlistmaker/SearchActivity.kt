@@ -246,14 +246,14 @@ class SearchActivity : AppCompatActivity() {
     private fun  runAudioPlayer(track: Track) {
         val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
 
-        audioPlayerIntent.putExtra("trackName", track.trackName)
-        audioPlayerIntent.putExtra("artistName", track.artistName)
-        audioPlayerIntent.putExtra("trackTimeMillis", track.trackTimeMillis)
-        audioPlayerIntent.putExtra("artworkUrl100", track.getCoverArtwork())
-        audioPlayerIntent.putExtra("collectionName", track.collectionName)
-        audioPlayerIntent.putExtra("releaseDate", track.getreleaseYear())
-        audioPlayerIntent.putExtra("primaryGenreName", track.primaryGenreName)
-        audioPlayerIntent.putExtra("country", track.country)
+        audioPlayerIntent.putExtra(AppConstants.TRACK_NAME, track.trackName)
+        audioPlayerIntent.putExtra(AppConstants.ARTIST_NAME, track.artistName)
+        audioPlayerIntent.putExtra(AppConstants.TRACK_TIME_MILLIS, track.trackTimeMillis)
+        audioPlayerIntent.putExtra(AppConstants.ARTWORK_URL, track.getCoverArtwork())
+        audioPlayerIntent.putExtra(AppConstants.COLLECTION_NAME, track.collectionName)
+        audioPlayerIntent.putExtra(AppConstants.RELEASE_DATE, track.getreleaseYear())
+        audioPlayerIntent.putExtra(AppConstants.PRIMARY_GENRE_NAME, track.primaryGenreName)
+        audioPlayerIntent.putExtra(AppConstants.COUNTRY, track.country)
 
         startActivity(audioPlayerIntent)
     }

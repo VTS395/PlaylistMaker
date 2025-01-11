@@ -31,18 +31,26 @@ class AudioPlayerActivity : AppCompatActivity() {
             finish()
         }
 
-        trackNameTextView.text = intent.getStringExtra("trackName")
-        artistNameTextView.text = intent.getStringExtra("artistName")
-        trackTimeTextView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(intent.getLongExtra("trackTimeMillis", 0))
-        collectionNameTextView.text = intent.getStringExtra("collectionName")
-        releaseDateTextView.text = intent.getStringExtra("releaseDate")
-        primaryGenreNameTextView.text = intent.getStringExtra("primaryGenreName")
-        countryTextView.text = intent.getStringExtra("country")
+        trackNameTextView.text = intent.getStringExtra(AppConstants.TRACK_NAME)
+        artistNameTextView.text = intent.getStringExtra(AppConstants.ARTIST_NAME)
+        trackTimeTextView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(intent.getLongExtra(AppConstants.TRACK_TIME_MILLIS, 0))
+        collectionNameTextView.text = intent.getStringExtra(AppConstants.COLLECTION_NAME)
+        releaseDateTextView.text = intent.getStringExtra(AppConstants.RELEASE_DATE)
+        primaryGenreNameTextView.text = intent.getStringExtra(AppConstants.PRIMARY_GENRE_NAME)
+        countryTextView.text = intent.getStringExtra(AppConstants.COUNTRY)
+
 
         Glide.with(this)
             .load(intent.getStringExtra("artworkUrl100"))
             .fitCenter()
             .placeholder(R.drawable.album_cover_placeholder)
             .into(albumCoverImageView)
+    }
+
+    private fun dpToPx(dp: Float, context: Context): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            context.resources.displayMetrics).toInt()
     }
 }
