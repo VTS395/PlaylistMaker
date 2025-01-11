@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.appbar.MaterialToolbar
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -17,7 +18,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audioplayer)
 
-        val backButton = findViewById<ImageView>(R.id.backButton)
+        val backButton = findViewById<MaterialToolbar>(R.id.backButton)
         val trackNameTextView: TextView = findViewById(R.id.trackName)
         val artistNameTextView: TextView = findViewById(R.id.artistName)
         val trackTimeTextView: TextView = findViewById(R.id.trackTimeMillis)
@@ -27,7 +28,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         val countryTextView: TextView = findViewById(R.id.country)
         val albumCoverImageView: ImageView = findViewById(R.id.albumCover)
 
-        backButton.setOnClickListener(){
+        backButton.setNavigationOnClickListener {
             finish()
         }
 

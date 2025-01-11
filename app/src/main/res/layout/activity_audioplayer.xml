@@ -41,22 +41,20 @@
 
         <!--    Блок лицевой с обложкой и названием трека и группы>-->
 
-        <ImageView
+        <com.google.android.material.appbar.MaterialToolbar
+            style="@style/ToolBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/back_icon"
-            android:scaleType="center"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="4dp"
+            app:navigationIcon="@drawable/back_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageView
             android:id="@+id/albumCover"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="26dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toEndOf="@id/leftTopBorder"
             app:layout_constraintEnd_toStartOf="@id/rightTopBorder"
