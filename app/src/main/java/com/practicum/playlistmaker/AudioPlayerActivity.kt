@@ -14,6 +14,18 @@ import java.util.Locale
 
 class AudioPlayerActivity : AppCompatActivity() {
 
+    companion object {
+        const val TRACK_NAME = "trackName"
+        const val ARTIST_NAME = "artistName"
+        const val TRACK_TIME_MILLIS = "trackTimeMillis"
+        const val ARTWORK_URL = "artworkUrl100"
+        const val COLLECTION_NAME = "collectionName"
+        const val RELEASE_DATE = "releaseDate"
+        const val PRIMARY_GENRE_NAME = "primaryGenreName"
+        const val COUNTRY = "country"
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audioplayer)
@@ -32,13 +44,18 @@ class AudioPlayerActivity : AppCompatActivity() {
             finish()
         }
 
-        trackNameTextView.text = intent.getStringExtra(AppConstants.TRACK_NAME)
-        artistNameTextView.text = intent.getStringExtra(AppConstants.ARTIST_NAME)
-        trackTimeTextView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(intent.getLongExtra(AppConstants.TRACK_TIME_MILLIS, 0))
-        collectionNameTextView.text = intent.getStringExtra(AppConstants.COLLECTION_NAME)
-        releaseDateTextView.text = intent.getStringExtra(AppConstants.RELEASE_DATE)
-        primaryGenreNameTextView.text = intent.getStringExtra(AppConstants.PRIMARY_GENRE_NAME)
-        countryTextView.text = intent.getStringExtra(AppConstants.COUNTRY)
+        trackNameTextView.text = intent.getStringExtra(TRACK_NAME)
+        artistNameTextView.text = intent.getStringExtra(ARTIST_NAME)
+        trackTimeTextView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(
+            intent.getLongExtra(
+                TRACK_TIME_MILLIS,
+                0
+            )
+        )
+        collectionNameTextView.text = intent.getStringExtra(COLLECTION_NAME)
+        releaseDateTextView.text = intent.getStringExtra(RELEASE_DATE)
+        primaryGenreNameTextView.text = intent.getStringExtra(PRIMARY_GENRE_NAME)
+        countryTextView.text = intent.getStringExtra(COUNTRY)
 
         val cornerRadius = dpToPx(8f, this)
 
