@@ -3,14 +3,16 @@ package com.practicum.playlistmaker
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +28,17 @@ import retrofit2.Response
 
 class SearchActivity : AppCompatActivity() {
 
+    companion object {
+        const val TEXT_AMOUNT = "TEXT_AMOUNT"
+        const val TEXT_DEF = ""
+        private const val CLICK_DEBOUNCE_DELAY = 1000L
+        private const val SEARCH_DEBOUNCE_DELAY = 500L
+    }
+
+    private var isClickAllowed = true
+
+    private val handler = Handler(Looper.getMainLooper())
+
     private lateinit var searchHistory: SearchHistory
 
     private var textValue: String? = TEXT_DEF
@@ -37,19 +50,25 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var updateResponse: Button
     private lateinit var historyHeader: TextView
     private lateinit var historyClear: Button
+    private lateinit var progressBar: ProgressBar
 
     private val tracks = ArrayList<Track>()
     private val history = ArrayList<Track>()
+    private val searchRunnable = Runnable { searchRequest() }
 
     private val searchAdapter = TrackAdapter(tracks) {
-        searchHistory.addTrackToHistory(it)
-        runAudioPlayer(it)
+        if (clickDebounce()) {
+            searchHistory.addTrackToHistory(it)
+            runAudioPlayer(it)
+        }
+
     }
 
     private val historyAdapter = TrackAdapter(history) {
-        val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
-
-        runAudioPlayer(it)
+        if (clickDebounce()) {
+            val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
+            runAudioPlayer(it)
+        }
     }
 
     private var lastQuery = ""
@@ -63,11 +82,6 @@ class SearchActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         textValue = savedInstanceState.getString(TEXT_AMOUNT, TEXT_DEF)
         findViewById<EditText>(R.id.inputEditText).setText(textValue)
-    }
-
-    companion object {
-        const val TEXT_AMOUNT = "TEXT_AMOUNT"
-        const val TEXT_DEF = ""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +99,7 @@ class SearchActivity : AppCompatActivity() {
         updateResponse = findViewById<Button>(R.id.updateResponse)
         historyHeader = findViewById<TextView>(R.id.historyHeader)
         historyClear = findViewById<Button>(R.id.historyClear)
+        progressBar = findViewById(R.id.progressBar)
 
         searchField.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus && searchField.text.isEmpty() && history.isNotEmpty()) {
@@ -134,6 +149,8 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 loadHistory()
+
+                searchDebounce()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -142,15 +159,6 @@ class SearchActivity : AppCompatActivity() {
         }
         searchField.addTextChangedListener(textWatcher)
         recyclerViewTrackList.adapter = searchAdapter
-
-        searchField.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (searchField.text.isNotEmpty()){
-                    trackSearch(searchField.text.toString())
-                }
-            }
-            false
-        }
 
         updateResponse.setOnClickListener() {
             if (lastQuery.isNotEmpty()) {
@@ -170,8 +178,12 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun trackSearch(input: String) {
+
+        setProgressBatVisability(true)
+
         RetrofitClient.itunesService.search(input).enqueue(object : Callback<TrackResponse> {
             override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
+                setProgressBatVisability(false)
                 if (response.code() == 200) {
                     tracks.clear()
                     setPlaceholderVisibility(false)
@@ -190,6 +202,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
+                setProgressBatVisability(false)
                 showError(input)
             }
         })
@@ -237,6 +250,16 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    private fun setProgressBatVisability(isVisible: Boolean) {
+        if (isVisible) {
+            progressBar.visibility = View.VISIBLE
+            recyclerViewTrackList.visibility = View.GONE
+        } else {
+            progressBar.visibility = View.GONE
+            recyclerViewTrackList.visibility = View.VISIBLE
+        }
+    }
+
     private fun hideKeyboard() {
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -257,4 +280,26 @@ class SearchActivity : AppCompatActivity() {
 
         startActivity(audioPlayerIntent)
     }
+
+    private fun clickDebounce(): Boolean {
+        val current = isClickAllowed
+        if (isClickAllowed) {
+            isClickAllowed = false
+            handler.postDelayed({ isClickAllowed = true }, CLICK_DEBOUNCE_DELAY)
+        }
+        return current
+    }
+
+    private fun searchDebounce() {
+        handler.removeCallbacks(searchRunnable)
+        handler.postDelayed(searchRunnable, SEARCH_DEBOUNCE_DELAY)
+    }
+
+    private fun searchRequest() {
+        if (searchField.text.isNotEmpty()) {
+            trackSearch(searchField.text.toString())
+        }
+    }
+
+
 }
