@@ -143,7 +143,7 @@ class SearchActivity : AppCompatActivity() {
                     setHistoryVisibility(false)
                 }
 
-                if(s.isNullOrEmpty()) {
+                if (s.isNullOrEmpty()) {
                     setPlaceholderVisibility(false)
                 }
 
@@ -178,7 +178,10 @@ class SearchActivity : AppCompatActivity() {
 
     private fun trackSearch(input: String) {
 
+        setPlaceholderVisibility(false)
+        setHistoryVisibility(false)
         setProgressBatVisability(true)
+
 
         RetrofitClient.itunesService.search(input).enqueue(object : Callback<TrackResponse> {
             override fun onResponse(call: Call<TrackResponse>, response: Response<TrackResponse>) {
@@ -265,7 +268,7 @@ class SearchActivity : AppCompatActivity() {
         inputMethodManager?.hideSoftInputFromWindow(clearButton.windowToken, 0)
     }
 
-    private fun  runAudioPlayer(track: Track) {
+    private fun runAudioPlayer(track: Track) {
         val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
 
         audioPlayerIntent.putExtra(AudioPlayerActivity.TRACK_NAME, track.trackName)
