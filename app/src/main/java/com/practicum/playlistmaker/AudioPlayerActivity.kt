@@ -32,6 +32,8 @@ class AudioPlayerActivity : AppCompatActivity() {
         private const val STATE_PREPARED = 1
         private const val STATE_PLAYING = 2
         private const val STATE_PAUSED = 3
+
+        private const val DEBOUNCE_DELAY = 500L
     }
 
     private var mediaPlayer = MediaPlayer()
@@ -48,7 +50,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         override fun run() {
             if (playerState == STATE_PLAYING) {
                 currentTimeTextView.text = dateFormat.format(mediaPlayer.currentPosition)
-                handler.postDelayed(this, 500)
+                handler.postDelayed(this, DEBOUNCE_DELAY)
             }
         }
     }
