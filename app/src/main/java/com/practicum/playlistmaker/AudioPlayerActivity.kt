@@ -42,11 +42,12 @@ class AudioPlayerActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var currentTimeTextView: TextView
 
+    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
+
     private val updateProgressRunnable = object : Runnable {
         override fun run() {
             if (playerState == STATE_PLAYING) {
-                currentTimeTextView.text = SimpleDateFormat("mm:ss", Locale.getDefault())
-                    .format(mediaPlayer.currentPosition)
+                currentTimeTextView.text = dateFormat.format(mediaPlayer.currentPosition)
                 handler.postDelayed(this, 500)
             }
         }
@@ -86,13 +87,6 @@ class AudioPlayerActivity : AppCompatActivity() {
         releaseDateTextView.text = intent.getStringExtra(RELEASE_DATE)
         primaryGenreNameTextView.text = intent.getStringExtra(PRIMARY_GENRE_NAME)
         countryTextView.text = intent.getStringExtra(COUNTRY)
-
-//        trackTimeTextView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(
-//            intent.getLongExtra(
-//                TRACK_TIME_MILLIS,
-//                0
-//            )
-//        )
 
         val cornerRadius = dpToPx(8f, this)
 
