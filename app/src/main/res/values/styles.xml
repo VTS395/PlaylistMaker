@@ -190,5 +190,15 @@
         <item name="android:textFontWeight">400</item>
     </style>
 
+    <style name="StatusBarStyle" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Настройте цвет статус-бара -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 
+    <style name="StatusBarStyleMainMenu" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Настройте цвет статус-бара -->
+        <item name="android:statusBarColor">@color/blue</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>
