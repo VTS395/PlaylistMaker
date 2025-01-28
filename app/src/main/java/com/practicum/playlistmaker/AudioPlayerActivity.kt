@@ -127,7 +127,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         }
         mediaPlayer.setOnCompletionListener {
             btnPlay.setImageResource(R.drawable.ic_play)
-            currentTimeTextView.text = "00:00"
+            currentTimeTextView.text = dateFormat.format(0L)
             playerState = STATE_PREPARED
             handler.removeCallbacks(updateProgressRunnable)
         }
