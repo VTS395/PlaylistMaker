@@ -127,7 +127,7 @@
             app:layout_constraintStart_toEndOf="@id/leftTopBorder"
             app:layout_constraintEnd_toStartOf="@id/rightTopBorder"
             app:layout_constraintTop_toBottomOf="@id/playButton"
-            android:text="0:30"/>
+            android:text="00:00" />
 
 
         <!--    Блок наименований позиций>-->
