@@ -170,8 +170,10 @@
             android:id="@+id/countryTitle"
             android:tag="country"
             android:text="@string/country"
+            android:layout_marginBottom="16dp"
             app:layout_constraintStart_toEndOf="@id/leftBotBorder"
-            app:layout_constraintTop_toBottomOf="@id/primaryGenreNameTitle"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/primaryGenreNameTitle" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier"
