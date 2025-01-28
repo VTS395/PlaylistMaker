@@ -66,7 +66,6 @@ class SearchActivity : AppCompatActivity() {
 
     private val historyAdapter = TrackAdapter(history) {
         if (clickDebounce()) {
-            val audioPlayerIntent = Intent(this, AudioPlayerActivity::class.java)
             runAudioPlayer(it)
         }
     }
@@ -277,6 +276,7 @@ class SearchActivity : AppCompatActivity() {
         audioPlayerIntent.putExtra(AudioPlayerActivity.RELEASE_DATE, track.getreleaseYear())
         audioPlayerIntent.putExtra(AudioPlayerActivity.PRIMARY_GENRE_NAME, track.primaryGenreName)
         audioPlayerIntent.putExtra(AudioPlayerActivity.COUNTRY, track.country)
+        audioPlayerIntent.putExtra(AudioPlayerActivity.PREVIEW_URL, track.previewUrl)
 
         startActivity(audioPlayerIntent)
     }
