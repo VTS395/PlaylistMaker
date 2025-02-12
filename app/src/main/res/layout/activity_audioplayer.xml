@@ -127,7 +127,7 @@
             app:layout_constraintStart_toEndOf="@id/leftTopBorder"
             app:layout_constraintEnd_toStartOf="@id/rightTopBorder"
             app:layout_constraintTop_toBottomOf="@id/playButton"
-            android:text="0:30"/>
+            android:text="00:00" />
 
 
         <!--    Блок наименований позиций>-->
@@ -170,8 +170,10 @@
             android:id="@+id/countryTitle"
             android:tag="country"
             android:text="@string/country"
+            android:layout_marginBottom="16dp"
             app:layout_constraintStart_toEndOf="@id/leftBotBorder"
-            app:layout_constraintTop_toBottomOf="@id/primaryGenreNameTitle"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/primaryGenreNameTitle" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier"

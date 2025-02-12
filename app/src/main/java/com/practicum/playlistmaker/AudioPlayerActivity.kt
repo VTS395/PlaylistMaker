@@ -1,7 +1,10 @@
 package com.practicum.playlistmaker
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,8 +26,34 @@ class AudioPlayerActivity : AppCompatActivity() {
         const val RELEASE_DATE = "releaseDate"
         const val PRIMARY_GENRE_NAME = "primaryGenreName"
         const val COUNTRY = "country"
+        const val PREVIEW_URL = "previewUrl"
+
+        private const val STATE_DEFAULT = 0
+        private const val STATE_PREPARED = 1
+        private const val STATE_PLAYING = 2
+        private const val STATE_PAUSED = 3
+
+        private const val DEBOUNCE_DELAY = 500L
     }
 
+    private var mediaPlayer = MediaPlayer()
+    private var playerState = STATE_DEFAULT
+    private lateinit var btnPlay: ImageView
+    private var previewUrl: String? = null
+
+    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var currentTimeTextView: TextView
+
+    private val dateFormat by lazy { SimpleDateFormat("mm:ss", Locale.getDefault()) }
+
+    private val updateProgressRunnable = object : Runnable {
+        override fun run() {
+            if (playerState == STATE_PLAYING) {
+                currentTimeTextView.text = dateFormat.format(mediaPlayer.currentPosition)
+                handler.postDelayed(this, DEBOUNCE_DELAY)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +68,16 @@ class AudioPlayerActivity : AppCompatActivity() {
         val primaryGenreNameTextView: TextView = findViewById(R.id.primaryGenreName)
         val countryTextView: TextView = findViewById(R.id.country)
         val albumCoverImageView: ImageView = findViewById(R.id.albumCover)
+        btnPlay = findViewById(R.id.playButton)
+        currentTimeTextView = findViewById(R.id.currentTime)
+
+        previewUrl = intent.getStringExtra(PREVIEW_URL)
+
+        preparePlayer()
+
+        btnPlay.setOnClickListener() {
+            playbackControl()
+        }
 
         backButton.setNavigationOnClickListener {
             finish()
@@ -46,12 +85,6 @@ class AudioPlayerActivity : AppCompatActivity() {
 
         trackNameTextView.text = intent.getStringExtra(TRACK_NAME)
         artistNameTextView.text = intent.getStringExtra(ARTIST_NAME)
-        trackTimeTextView.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(
-            intent.getLongExtra(
-                TRACK_TIME_MILLIS,
-                0
-            )
-        )
         collectionNameTextView.text = intent.getStringExtra(COLLECTION_NAME)
         releaseDateTextView.text = intent.getStringExtra(RELEASE_DATE)
         primaryGenreNameTextView.text = intent.getStringExtra(PRIMARY_GENRE_NAME)
@@ -67,10 +100,62 @@ class AudioPlayerActivity : AppCompatActivity() {
             .into(albumCoverImageView)
     }
 
+    override fun onPause() {
+        super.onPause()
+        pausePlayer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(updateProgressRunnable)
+        mediaPlayer.release()
+    }
+
     private fun dpToPx(dp: Float, context: Context): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             dp,
             context.resources.displayMetrics).toInt()
+    }
+
+    private fun preparePlayer() {
+        mediaPlayer.setDataSource(previewUrl)
+        mediaPlayer.prepareAsync()
+        mediaPlayer.setOnPreparedListener {
+            btnPlay.isEnabled = true
+            playerState = STATE_PREPARED
+        }
+        mediaPlayer.setOnCompletionListener {
+            btnPlay.setImageResource(R.drawable.ic_play)
+            currentTimeTextView.text = dateFormat.format(0L)
+            playerState = STATE_PREPARED
+            handler.removeCallbacks(updateProgressRunnable)
+        }
+    }
+
+    private fun startPlayer() {
+        mediaPlayer.start()
+        btnPlay.setImageResource(R.drawable.ic_pause)
+        playerState = STATE_PLAYING
+        handler.post(updateProgressRunnable)
+    }
+
+    private fun pausePlayer() {
+        mediaPlayer.pause()
+        btnPlay.setImageResource(R.drawable.ic_play)
+        playerState = STATE_PAUSED
+        handler.removeCallbacks(updateProgressRunnable)
+    }
+
+    private fun playbackControl() {
+        when (playerState) {
+            STATE_PLAYING -> {
+                pausePlayer()
+            }
+
+            STATE_PREPARED, STATE_PAUSED -> {
+                startPlayer()
+            }
+        }
     }
 }
