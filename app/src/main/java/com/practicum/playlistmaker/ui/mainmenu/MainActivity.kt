@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker
+package com.practicum.playlistmaker.ui.mainmenu
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.practicum.playlistmaker.R
+import com.practicum.playlistmaker.ui.media.MediaActivity
+import com.practicum.playlistmaker.ui.search.SearchActivity
+import com.practicum.playlistmaker.ui.settings.SettingsActivity
 
 
 class MainActivity : AppCompatActivity() {

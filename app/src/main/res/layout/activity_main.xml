@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/base_padding"
-    tools:context=".MainActivity">
+    tools:context=".ui.mainmenu.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
