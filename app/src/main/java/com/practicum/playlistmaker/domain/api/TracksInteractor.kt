@@ -6,7 +6,7 @@ interface TracksInteractor {
     fun searchTracks(expression: String, consumer: TrackConsumer)
 
     interface TrackConsumer {
-        fun consume(foundMovies: List<Track>)
+        fun consume(foundTracks: List<Track>)
         fun cunsumeError(error: String?)
     }
 }
