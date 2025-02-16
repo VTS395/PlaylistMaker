@@ -1,4 +1,4 @@
-package com.practicum.playlistmaker.api
+package com.practicum.playlistmaker.domain.models
 
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter

@@ -1,10 +1,12 @@
-package com.practicum.playlistmaker
+package com.practicum.playlistmaker.data.network
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.practicum.playlistmaker.api.Track
+import com.practicum.playlistmaker.domain.api.SearchHistoryRepository
+import com.practicum.playlistmaker.domain.models.Track
 
-class SearchHistory(private val sharedPreferences: SharedPreferences) {
+class SearchHistoryRepositoryImpl(private val sharedPreferences: SharedPreferences) :
+    SearchHistoryRepository {
     companion object {
         private const val HISTORY_KEY = "history"
         private const val MAX_HISTORY_SIZE = 10
@@ -12,8 +14,8 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
 
     private val gson = Gson()
 
-    fun addTrackToHistory(track: Track) {
-        val currentHistory = getSearchHistory()
+    override fun addTrackToHistory(track: Track) {
+        val currentHistory = getSearchHistory().toMutableList()
         if (currentHistory.contains(track)) {
             currentHistory.remove(track)
         }
@@ -25,20 +27,20 @@ class SearchHistory(private val sharedPreferences: SharedPreferences) {
         saveHistory(currentHistory)
     }
 
-    fun getSearchHistory(): MutableList<Track> {
+    override fun getSearchHistory(): List<Track> {
         val historyJson = sharedPreferences.getString(HISTORY_KEY, null)
         return if (historyJson != null) {
-            gson.fromJson(historyJson, Array<Track>::class.java).toMutableList()
+            gson.fromJson(historyJson, Array<Track>::class.java).toList()
         } else {
-            mutableListOf()
+            emptyList()
         }
     }
 
-    fun clearHistory() {
-        saveHistory(mutableListOf())
+    override fun clearHistory() {
+        saveHistory(emptyList())
     }
 
-    private fun saveHistory(history: MutableList<Track>) {
+    private fun saveHistory(history: List<Track>) {
         val historyJson = gson.toJson(history)
         sharedPreferences.edit()
             .putString(HISTORY_KEY, historyJson)

@@ -17,23 +17,23 @@
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".SearchActivity"
+            android:name=".ui.search.SearchActivity"
             android:theme="@style/StatusBarStyle"
             android:exported="false" />
         <activity
-            android:name=".MediaActivity"
+            android:name=".ui.media.MediaActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.settings.SettingsActivity"
             android:theme="@style/StatusBarStyle"
             android:exported="false" />
         <activity
-            android:name=".AudioPlayerActivity"
+            android:name=".ui.audioplayer.AudioPlayerActivity"
             android:theme="@style/StatusBarStyle"
             android:exported="false"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.mainmenu.MainActivity"
             android:theme="@style/StatusBarStyleMainMenu"
             android:exported="true">
             <intent-filter>
