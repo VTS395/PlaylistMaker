@@ -1,6 +1,5 @@
 package com.practicum.playlistmaker.ui.mainmenu
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,7 +12,6 @@ import com.practicum.playlistmaker.ui.settings.SettingsActivity
 
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

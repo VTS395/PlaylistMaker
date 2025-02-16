@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.practicum.playlistmaker.Creator
 import com.practicum.playlistmaker.R
+import com.practicum.playlistmaker.domain.api.SearchHistoryRepository
 import com.practicum.playlistmaker.domain.api.TracksInteractor
 import com.practicum.playlistmaker.domain.models.Track
 import com.practicum.playlistmaker.ui.audioplayer.AudioPlayerActivity
@@ -39,8 +40,6 @@ class SearchActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
 
-    private lateinit var searchHistory: SearchHistory
-
     private var textValue: String? = TEXT_DEF
     private lateinit var searchField: EditText
     private lateinit var clearButton: ImageView
@@ -52,9 +51,14 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var historyClear: Button
     private lateinit var progressBar: ProgressBar
 
+    private var lastQuery = ""
+
     private val tracks = ArrayList<Track>()
     private val history = ArrayList<Track>()
     private val searchRunnable = Runnable { searchRequest() }
+
+    private val tracksInteractor: TracksInteractor = Creator.provideTracksInteractor()
+    private lateinit var searchHistory: SearchHistoryRepository
 
     private val searchAdapter = TrackAdapter(tracks) {
         if (clickDebounce()) {
@@ -69,8 +73,6 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private var lastQuery = ""
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(TEXT_AMOUNT, textValue)
@@ -82,14 +84,12 @@ class SearchActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.inputEditText).setText(textValue)
     }
 
-    private val tracksTnteractor: TracksInteractor = Creator.provideTracksInteractor()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+        Creator.initialize(this)
 
-        val sharedPreferences = getSharedPreferences("searchPrefs", Context.MODE_PRIVATE)
-        searchHistory = SearchHistory(sharedPreferences)
+        searchHistory = Creator.provideSearchHistoryRepository()
 
         searchField = findViewById<EditText>(R.id.inputEditText)
         clearButton = findViewById<ImageView>(R.id.clearIcon)
@@ -181,17 +181,17 @@ class SearchActivity : AppCompatActivity() {
 
         setPlaceholderVisibility(false)
         setHistoryVisibility(false)
-        setProgressBatVisability(true)
+        setProgressBarVisability(true)
 
         lastQuery = input
 
-        tracksTnteractor.searchTracks(input, object : TracksInteractor.TrackConsumer {
-            override fun consume(foundMovies: List<Track>) {
+        tracksInteractor.searchTracks(input, object : TracksInteractor.TrackConsumer {
+            override fun consume(foundTracks: List<Track>) {
                 runOnUiThread {
-                    setProgressBatVisability(false)
-                    if (foundMovies.isNotEmpty()) {
+                    setProgressBarVisability(false)
+                    if (foundTracks.isNotEmpty()) {
                         tracks.clear()
-                        tracks.addAll(foundMovies)
+                        tracks.addAll(foundTracks)
                         searchAdapter.notifyDataSetChanged()
                         recyclerViewTrackList.adapter = searchAdapter
                     } else {
@@ -202,7 +202,7 @@ class SearchActivity : AppCompatActivity() {
 
             override fun cunsumeError(error: String?) {
                 runOnUiThread {
-                    setProgressBatVisability(false)
+                    setProgressBarVisability(false)
                     showError(input)
                 }
             }
@@ -251,7 +251,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun setProgressBatVisability(isVisible: Boolean) {
+    private fun setProgressBarVisability(isVisible: Boolean) {
         if (isVisible) {
             progressBar.visibility = View.VISIBLE
             recyclerViewTrackList.visibility = View.GONE
